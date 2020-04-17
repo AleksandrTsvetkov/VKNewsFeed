@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Pods_VKNewsFeed
+import VK_ios_sdk
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AuthServiceDelegate {
