@@ -24,8 +24,6 @@
 		1FB92A632449C7BD008716C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FB92A522449C7BD008716C1 /* LaunchScreen.storyboard */; };
 		1FB92A642449C7BD008716C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB92A542449C7BD008716C1 /* AppDelegate.swift */; };
 		1FB92A662449C7BD008716C1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB92A562449C7BD008716C1 /* SceneDelegate.swift */; };
-		1FB92A672449C7BD008716C1 /* FeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FB92A582449C7BD008716C1 /* FeedViewController.storyboard */; };
-		1FB92A682449C7BD008716C1 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB92A592449C7BD008716C1 /* FeedViewController.swift */; };
 		1FB92A692449C7BD008716C1 /* UIViewController + Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB92A5B2449C7BD008716C1 /* UIViewController + Storyboard.swift */; };
 		1FB92A6A2449C7BD008716C1 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB92A5D2449C7BD008716C1 /* NetworkService.swift */; };
 		1FB92A6B2449C7BD008716C1 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB92A5E2449C7BD008716C1 /* AuthService.swift */; };
@@ -66,8 +64,6 @@
 		1FB92A542449C7BD008716C1 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FB92A552449C7BD008716C1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FB92A562449C7BD008716C1 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1FB92A582449C7BD008716C1 /* FeedViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FeedViewController.storyboard; sourceTree = "<group>"; };
-		1FB92A592449C7BD008716C1 /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		1FB92A5B2449C7BD008716C1 /* UIViewController + Storyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController + Storyboard.swift"; sourceTree = "<group>"; };
 		1FB92A5D2449C7BD008716C1 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		1FB92A5E2449C7BD008716C1 /* AuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -153,7 +149,6 @@
 			isa = PBXGroup;
 			children = (
 				1FB92A4D2449C7BD008716C1 /* Auth */,
-				1FB92A572449C7BD008716C1 /* FeedViewController */,
 				1FB92A5A2449C7BD008716C1 /* Helpers */,
 				1F666B49244A80A800FC26FD /* NewsFeed */,
 				1FB92A5C2449C7BD008716C1 /* Services */,
@@ -181,15 +176,6 @@
 				1FB92A562449C7BD008716C1 /* SceneDelegate.swift */,
 			);
 			path = "Supporting files";
-			sourceTree = "<group>";
-		};
-		1FB92A572449C7BD008716C1 /* FeedViewController */ = {
-			isa = PBXGroup;
-			children = (
-				1FB92A582449C7BD008716C1 /* FeedViewController.storyboard */,
-				1FB92A592449C7BD008716C1 /* FeedViewController.swift */,
-			);
-			path = FeedViewController;
 			sourceTree = "<group>";
 		};
 		1FB92A5A2449C7BD008716C1 /* Helpers */ = {
@@ -294,7 +280,6 @@
 				1FB92A632449C7BD008716C1 /* LaunchScreen.storyboard in Resources */,
 				1F3DA1B4244B1CFB00143E2E /* NewsFeedCell.xib in Resources */,
 				1FB92A622449C7BD008716C1 /* Assets.xcassets in Resources */,
-				1FB92A672449C7BD008716C1 /* FeedViewController.storyboard in Resources */,
 				1FB92A612449C7BD008716C1 /* AuthViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -353,7 +338,6 @@
 				1F666B54244A80E300FC26FD /* NewsFeedModels.swift in Sources */,
 				1FB92A692449C7BD008716C1 /* UIViewController + Storyboard.swift in Sources */,
 				1FB92A602449C7BD008716C1 /* AuthViewController.swift in Sources */,
-				1FB92A682449C7BD008716C1 /* FeedViewController.swift in Sources */,
 				1F666B48244A118E00FC26FD /* NetworkDataFetcher.swift in Sources */,
 				1FB92A6A2449C7BD008716C1 /* NetworkService.swift in Sources */,
 				1FB92A662449C7BD008716C1 /* SceneDelegate.swift in Sources */,
