@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthServiceDelegate {
     
     func authServiceSignIn() {
         print(#function)
-        let feedVC: FeedViewController = FeedViewController.loadFromStoryboard()
+        let feedVC: NewsFeedViewController = NewsFeedViewController.loadFromStoryboard()
         let navigationVC = UINavigationController(rootViewController: feedVC)
         UIApplication.shared.windows.first?.rootViewController = navigationVC
     }
