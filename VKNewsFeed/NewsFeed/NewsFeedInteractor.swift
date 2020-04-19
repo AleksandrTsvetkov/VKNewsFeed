@@ -24,12 +24,12 @@ class NewsFeedInteractor: NewsFeedBusinessLogic {
         }
         switch request {
         case .getNewsFeed:
-            fetcher.getFeed { [ presenter ] (feedResponse) in
+            fetcher.getFeed { [weak self] (feedResponse) in
                 guard let feedResponse = feedResponse else {
                     print("Feed response is nil in \(#function)")
                     return
                 }
-                presenter?.presentData(response: .presentNewsFeed(feed: feedResponse))
+                self?.presenter?.presentData(response: .presentNewsFeed(feed: feedResponse))
             }
         }
     }

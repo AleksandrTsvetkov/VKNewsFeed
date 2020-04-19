@@ -51,10 +51,10 @@ struct Photo: Decodable {
     private func getPropperSize() -> PhotoSize {
         if let sizeX = sizes.first(where: { $0.type == "x" }) {
             return sizeX
-        } else if let sizeZ = sizes.last {
-            return sizeZ
+        } else if let fallBackSize = sizes.last {
+             return fallBackSize
         } else {
-            fatalError("Failed to get expected size in \(#function)")
+            return PhotoSize(type: "wrong image", url: "wrong image", width: 0, height: 0)
         }
     }
 }

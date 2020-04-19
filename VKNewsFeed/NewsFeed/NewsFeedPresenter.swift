@@ -33,10 +33,8 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
     }
     
     private func cellViewModel(from feedItem: FeedItem, profiles: [Profile], groups: [Group]) -> FeedViewModel.Cell {
-        guard let profile = self.profile(for: feedItem.sourceId, profiles: profiles, groups: groups) else {
-            fatalError("Failed to get profile in \(#function)")
-        }
-        let photoAttachment = createPhotoAttachment(feedItem: feedItem)
+        let profile = self.profile(for: feedItem.sourceId, profiles: profiles, groups: groups)
+        let photoAttachment = self.createPhotoAttachment(feedItem: feedItem)
         let date = Date(timeIntervalSince1970: feedItem.date)
         let dateTitle = dateFormatter.string(from: date)
         return FeedViewModel.Cell(iconUrlString: profile.photo,
@@ -50,18 +48,20 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                   photoAttachment: photoAttachment)
     }
     
-    private func profile(for sourceId: Int, profiles: [Profile], groups: [Group]) -> ProfileRepresentable? {
+    private func profile(for sourceId: Int, profiles: [Profile], groups: [Group]) -> ProfileRepresentable {
         let profilesOrGroups: [ProfileRepresentable] = sourceId >= 0 ? profiles : groups
         let normalSourceId = sourceId >= 0 ? sourceId : -sourceId
         let profileRepresentable = profilesOrGroups.first { myProfileRepresentable in
             myProfileRepresentable.id == normalSourceId
         }
-        return profileRepresentable
+        return profileRepresentable!
     }
     
     private func createPhotoAttachment(feedItem: FeedItem) -> FeedViewModel.FeedCellPhotoAttachment? {
         guard
-            let photos = feedItem.attachments?.compactMap({ $0.photo }),
+            let photos = feedItem.attachments?.compactMap({ (attachment) in
+                attachment.photo
+            }),
             let firstPhoto = photos.first else {
                 print("Can't get photo in \(#function)")
                 return nil
