@@ -36,6 +36,7 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
         guard let profile = self.profile(for: feedItem.sourceId, profiles: profiles, groups: groups) else {
             fatalError("Failed to get profile in \(#function)")
         }
+        let photoAttachment = createPhotoAttachment(feedItem: feedItem)
         let date = Date(timeIntervalSince1970: feedItem.date)
         let dateTitle = dateFormatter.string(from: date)
         return FeedViewModel.Cell(iconUrlString: profile.photo,
@@ -45,7 +46,8 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                   likes: String(feedItem.likes?.count ?? 0),
                                   comments: String(feedItem.comments?.count ?? 0),
                                   shares: String(feedItem.reposts?.count ?? 0),
-                                  views: String(feedItem.views?.count ?? 0))
+                                  views: String(feedItem.views?.count ?? 0),
+                                  photoAttachment: photoAttachment)
     }
     
     private func profile(for sourceId: Int, profiles: [Profile], groups: [Group]) -> ProfileRepresentable? {
@@ -55,5 +57,17 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
             myProfileRepresentable.id == normalSourceId
         }
         return profileRepresentable
+    }
+    
+    private func createPhotoAttachment(feedItem: FeedItem) -> FeedViewModel.FeedCellPhotoAttachment? {
+        guard
+            let photos = feedItem.attachments?.compactMap({ $0.photo }),
+            let firstPhoto = photos.first else {
+                print("Can't get photo in \(#function)")
+                return nil
+        }
+        return FeedViewModel.FeedCellPhotoAttachment(photoUrlString: firstPhoto.srcBIG,
+                                                     width: firstPhoto.width,
+                                                     height: firstPhoto.height)
     }
 }

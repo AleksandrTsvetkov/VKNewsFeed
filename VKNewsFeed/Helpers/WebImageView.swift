@@ -10,8 +10,10 @@ import UIKit
 
 class WebImageView: UIImageView {
     
-    func set(imageURL: String) {
-        guard let url = URL(string: imageURL) else {
+    func set(imageURL: String?) {
+        guard
+            let urlString = imageURL,
+            let url = URL(string: urlString) else {
             print("Failed to create URL in \(#function)")
             return
         }
