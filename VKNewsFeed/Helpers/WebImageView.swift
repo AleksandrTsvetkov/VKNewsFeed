@@ -14,19 +14,18 @@ class WebImageView: UIImageView {
         guard
             let urlString = imageURL,
             let url = URL(string: urlString) else {
-            print("Failed to create URL in \(#function)")
-            return
+                self.image = nil
+                print("Failed to create URL in \(#function)")
+                return
         }
         if let cachedResponse = URLCache.shared.cachedResponse(for: URLRequest(url: url)) {
             self.image = UIImage(data: cachedResponse.data)
-            print("From cache")
             return
         }
         let dataTask = URLSession.shared.dataTask(with: url) { [self] (data, response, error) in
             DispatchQueue.main.async {
                 if let data = data, let response = response {
                     self.image = UIImage(data: data)
-                    print("From internet")
                     self.handleLoadedImage(data: data, response: response)
                 }
             }
