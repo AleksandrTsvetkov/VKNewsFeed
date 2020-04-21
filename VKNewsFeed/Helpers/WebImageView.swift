@@ -22,11 +22,11 @@ class WebImageView: UIImageView {
             self.image = UIImage(data: cachedResponse.data)
             return
         }
-        let dataTask = URLSession.shared.dataTask(with: url) { [self] (data, response, error) in
+        let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
             DispatchQueue.main.async {
                 if let data = data, let response = response {
-                    self.image = UIImage(data: data)
-                    self.handleLoadedImage(data: data, response: response)
+                    self?.image = UIImage(data: data)
+                    self?.handleLoadedImage(data: data, response: response)
                 }
             }
         }
