@@ -15,7 +15,6 @@ class WebImageView: UIImageView {
             let urlString = imageURL,
             let url = URL(string: urlString) else {
                 self.image = nil
-                print("Failed to create URL in \(#function)")
                 return
         }
         if let cachedResponse = URLCache.shared.cachedResponse(for: URLRequest(url: url)) {

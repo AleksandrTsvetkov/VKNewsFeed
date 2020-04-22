@@ -26,22 +26,23 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
     
     func presentData(response: NewsFeed.Model.Response.ResponseType) {
         switch response {
-        case .presentNewsFeed(feed: let feed):
+        case .presentNewsFeed(let feed, let revealedPostIds):
             let cells = feed.items.map { (feedItem) in
-                cellViewModel(from: feedItem, profiles: feed.profiles, groups: feed.groups)
+                cellViewModel(from: feedItem, profiles: feed.profiles, groups: feed.groups, revealedPostIds: revealedPostIds)
             }
             let feedViewModel = FeedViewModel(cells: cells)
             viewController?.displayData(viewModel: .displayNewsFeed(feedViewModel: feedViewModel))
         }
     }
     
-    private func cellViewModel(from feedItem: FeedItem, profiles: [Profile], groups: [Group]) -> FeedViewModel.Cell {
+    private func cellViewModel(from feedItem: FeedItem, profiles: [Profile], groups: [Group], revealedPostIds: Array<Int>) -> FeedViewModel.Cell {
         let profile = self.profile(for: feedItem.sourceId, profiles: profiles, groups: groups)
-        let photoAttachment = self.createPhotoAttachment(feedItem: feedItem)
+        let photoAttachments = self.createPhotoAttachments(feedItem: feedItem)
         let date = Date(timeIntervalSince1970: feedItem.date)
         let dateTitle = dateFormatter.string(from: date)
-        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text ?? "", photoAttachment: photoAttachment)
-        return FeedViewModel.Cell(iconUrlString: profile.photo,
+        let isFullSized = revealedPostIds.contains(feedItem.postId)
+        let sizes = cellLayoutCalculator.sizes(postText: feedItem.text ?? "", photoAttachments: photoAttachments, isFullSizedPost: isFullSized)
+        return FeedViewModel.Cell(postId: feedItem.postId, iconUrlString: profile.photo,
                                   name: profile.name,
                                   date: dateTitle,
                                   text: feedItem.text,
@@ -49,7 +50,7 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                                   comments: String(feedItem.comments?.count ?? 0),
                                   shares: String(feedItem.reposts?.count ?? 0),
                                   views: String(feedItem.views?.count ?? 0),
-                                  photoAttachment: photoAttachment,
+                                  photoAttachments: photoAttachments,
                                   sizes: sizes)
     }
     
@@ -68,11 +69,18 @@ class NewsFeedPresenter: NewsFeedPresentationLogic {
                 attachment.photo
             }),
             let firstPhoto = photos.first else {
-                print("Can't get photo in \(#function)")
                 return nil
         }
         return FeedViewModel.FeedCellPhotoAttachment(photoUrlString: firstPhoto.srcBIG,
                                                      width: firstPhoto.width,
                                                      height: firstPhoto.height)
+    }
+    
+    private func createPhotoAttachments(feedItem: FeedItem) -> [FeedViewModel.FeedCellPhotoAttachment] {
+        guard let attachments = feedItem.attachments else { return [] }
+        return attachments.compactMap { (attachment) -> FeedViewModel.FeedCellPhotoAttachment? in
+            guard let photo = attachment.photo else { return nil}
+            return FeedViewModel.FeedCellPhotoAttachment(photoUrlString: photo.srcBIG, width: photo.width, height: photo.height)
+        }
     }
 }
