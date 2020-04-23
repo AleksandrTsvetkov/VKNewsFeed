@@ -81,7 +81,14 @@ final class NewsFeedLayoutCalculator: NewsFeedLayoutCalculatorProtocol {
             if photoAttachments.count == 1 {
                 attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ratio)
             } else if photoAttachments.count > 1 {
-                attachmentFrame.size = CGSize(width: cardViewWidth, height: cardViewWidth * ratio)
+                var photos: Array<CGSize> = []
+                for photo in photoAttachments {
+                    let photoSize = CGSize(width: CGFloat(photo.width), height: CGFloat(photo.height))
+                    photos.append(photoSize)
+                }
+                if let rowHeight = RowLayout.calculateRowHeight(superViewWidth: cardViewWidth, photosArray: photos) {
+                    attachmentFrame.size = CGSize(width: cardViewWidth, height: rowHeight)
+                }
             }
         }
         let bottomViewTop = max(postLabelFrame.maxY, attachmentFrame.maxY)

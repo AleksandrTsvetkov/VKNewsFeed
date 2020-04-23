@@ -8,26 +8,36 @@
 
 import UIKit
 
-class GalleryCollectionView: UICollectionView {
+class GalleryCollectionView: UICollectionView, UICollectionViewDelegateFlowLayout {
     
     var photos: Array<FeedCellPhotoAttachmentViewModel> = []
     
     init() {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        super.init(frame: .zero, collectionViewLayout: layout)
+        let rowLayout = RowLayout()
+        super.init(frame: .zero, collectionViewLayout: rowLayout)
         delegate = self
         dataSource = self
+        backgroundColor = .white
+        showsHorizontalScrollIndicator = false
+        showsVerticalScrollIndicator = false
         register(GalleryCollectionViewCell.self, forCellWithReuseIdentifier: GalleryCollectionViewCell.reuseId)
+        if let rowLayout = collectionViewLayout as? RowLayout {
+            rowLayout.delegate = self
+        }
     }
     
     func set(photos: Array<FeedCellPhotoAttachmentViewModel>) {
         self.photos = photos
+        contentOffset = CGPoint.zero
         reloadData()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: frame.width, height: frame.height)
     }
     
 }
@@ -42,5 +52,14 @@ extension GalleryCollectionView: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GalleryCollectionViewCell.reuseId, for: indexPath) as! GalleryCollectionViewCell
         cell.set(imageUrl: photos[indexPath.row].photoUrlString)
         return cell
+    }
+}
+
+extension GalleryCollectionView: RowLayoutDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, photoAt indexPath: IndexPath) -> CGSize {
+        let width: Int = photos[indexPath.row].width
+        let height: Int = photos[indexPath.row].height
+        return CGSize(width: width, height: height)
     }
 }
