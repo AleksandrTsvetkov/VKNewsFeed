@@ -37,16 +37,26 @@ final class NewsFeedCodeCell: UITableViewCell {
         return view
     }()
     
-    private let postLabel: UILabel = {
-        let label = UILabel()
-        //label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.font = Constants.postLabelFont
-        label.textColor = UIColor(hex: "2C2D2E")
-        //label.backgroundColor = UIColor(hex: "DA407A")
-        //label.backgroundColor = #colorLiteral(red: 0.1725490196, green: 0.1764705882, blue: 0.1803921569, alpha: 1)
-        //label.backgroundColor = #colorLiteral(red: 0.8549019694, green: 0.250980407, blue: 0.4784313738, alpha: 1)
-        return label
+//    private let postView: UILabel = {
+//        let label = UILabel()
+//        //label.translatesAutoresizingMaskIntoConstraints = false
+//        label.numberOfLines = 0
+//        label.font = Constants.postLabelFont
+//        label.textColor = UIColor(hex: "2C2D2E")
+//        return label
+//    }()
+    
+    private let postView: UITextView = {
+        let textView = UITextView()
+        textView.font = Constants.postLabelFont
+        textView.isScrollEnabled = false
+        textView.isSelectable = true
+        textView.isUserInteractionEnabled = true
+        textView.isEditable = false
+        let padding = textView.textContainer.lineFragmentPadding
+        textView.textContainerInset = UIEdgeInsets(top: 0, left: -padding, bottom: 0, right: -padding)
+        textView.dataDetectorTypes = .all
+        return textView
     }()
     
     private let moreTextButton: UIButton = {
@@ -236,12 +246,12 @@ final class NewsFeedCodeCell: UITableViewCell {
         iconImageView.set(imageURL: viewModel.iconUrlString)
         nameLabel.text = viewModel.name
         dateLabel.text = viewModel.date
-        postLabel.text = viewModel.text
+        postView.text = viewModel.text
         likesLabel.text = viewModel.likes
         commentsLabel.text = viewModel.comments
         sharesLabel.text = viewModel.shares
         viewsLabel.text = viewModel.views
-        postLabel.frame = viewModel.sizes.postLabelFrame
+        postView.frame = viewModel.sizes.postLabelFrame
         bottomView.frame = viewModel.sizes.bottomViewFrame
         moreTextButton.frame = viewModel.sizes.moreTextButtonFrame
         
@@ -269,7 +279,7 @@ final class NewsFeedCodeCell: UITableViewCell {
     
     private func overlaySecondLayer() {
         cardView.addSubview(topView)
-        cardView.addSubview(postLabel)
+        cardView.addSubview(postView)
         cardView.addSubview(moreTextButton)
         cardView.addSubview(postImageView)
         cardView.addSubview(galleryCollectionView)
