@@ -18,7 +18,7 @@ final class NewsFeedCodeCell: UITableViewCell {
     weak var delegate: NewsFeedCodeCellDelegate?
     
     //MARK: FIRST LAYER
-    let cardView: UIView = {
+    private let cardView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         //view.backgroundColor = #colorLiteral(red: 0.5725490196, green: 0, blue: 0.231372549, alpha: 1)
@@ -29,7 +29,7 @@ final class NewsFeedCodeCell: UITableViewCell {
     }()
     
     //MARK: SECOND LAYER
-    let topView: UIView = {
+    private let topView: UIView = {
         let view = UIView()
         //view.backgroundColor = UIColor(hex: "F4A88B")
         //view.backgroundColor = #colorLiteral(red: 0.9568627477, green: 0.6588235497, blue: 0.5450980663, alpha: 1)
@@ -37,7 +37,7 @@ final class NewsFeedCodeCell: UITableViewCell {
         return view
     }()
     
-    let postLabel: UILabel = {
+    private let postLabel: UILabel = {
         let label = UILabel()
         //label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
@@ -49,7 +49,7 @@ final class NewsFeedCodeCell: UITableViewCell {
         return label
     }()
     
-    let moreTextButton: UIButton = {
+    private let moreTextButton: UIButton = {
         let button: UIButton = UIButton()
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         button.setTitleColor(UIColor(hex: "669FD4"), for: .normal)
@@ -60,9 +60,9 @@ final class NewsFeedCodeCell: UITableViewCell {
         return button
     }()
     
-    let galleryCollectionView: GalleryCollectionView = GalleryCollectionView()
+    private let galleryCollectionView: GalleryCollectionView = GalleryCollectionView()
     
-    let postImageView: WebImageView = {
+    private let postImageView: WebImageView = {
         let imageView = WebImageView()
         //imageView.translatesAutoresizingMaskIntoConstraints = false
         //imageView.backgroundColor = UIColor(hex: "E3E5E8")
@@ -70,7 +70,7 @@ final class NewsFeedCodeCell: UITableViewCell {
         return imageView
     }()
     
-    let bottomView: UIView = {
+    private let bottomView: UIView = {
         let view = UIView()
         //view.backgroundColor = UIColor(hex: "F9D98C")
         //view.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
@@ -80,7 +80,7 @@ final class NewsFeedCodeCell: UITableViewCell {
     //MARK: THIRD LAYER
     
     // TopView subviews
-    let iconImageView: WebImageView = {
+    private let iconImageView: WebImageView = {
         let imageView = WebImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         //imageView.backgroundColor = UIColor(hex: "5D11F7")
@@ -88,7 +88,7 @@ final class NewsFeedCodeCell: UITableViewCell {
         return imageView
     }()
     
-    let nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
@@ -99,7 +99,7 @@ final class NewsFeedCodeCell: UITableViewCell {
         return label
     }()
     
-    let dateLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(hex: "818C99")
@@ -111,28 +111,28 @@ final class NewsFeedCodeCell: UITableViewCell {
     }()
     
     // BottomView subviews
-    let likesView: UIView = {
+    private let likesView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         //view.backgroundColor = .white
         return view
     }()
     
-    let commentsView: UIView = {
+    private let commentsView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         //view.backgroundColor = .black
         return view
     }()
     
-    let sharesView: UIView = {
+    private let sharesView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         //view.backgroundColor = .white
         return view
     }()
     
-    let viewsView: UIView = {
+    private let viewsView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         //view.backgroundColor = .white
@@ -140,35 +140,35 @@ final class NewsFeedCodeCell: UITableViewCell {
     }()
     
     //MARK: FOURTH LAYER
-    let likesImage: UIImageView = {
+    private let likesImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "like")
         return imageView
     }()
     
-    let commentsImage: UIImageView = {
+    private let commentsImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "comment")
         return imageView
     }()
     
-    let sharesImage: UIImageView = {
+    private let sharesImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "share")
         return imageView
     }()
     
-    let viewsImage: UIImageView = {
+    private let viewsImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.image = UIImage(named: "eye")
         return imageView
     }()
     
-    let likesLabel: UILabel = {
+    private let likesLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(hex: "818C99")
@@ -177,7 +177,7 @@ final class NewsFeedCodeCell: UITableViewCell {
         return label
     }()
     
-    let commentsLabel: UILabel = {
+    private let commentsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(hex: "818C99")
@@ -186,7 +186,7 @@ final class NewsFeedCodeCell: UITableViewCell {
         return label
     }()
     
-    let sharesLabel: UILabel = {
+    private let sharesLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(hex: "818C99")
@@ -195,7 +195,7 @@ final class NewsFeedCodeCell: UITableViewCell {
         return label
     }()
     
-    let viewsLabel: UILabel = {
+    private let viewsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor(hex: "818C99")

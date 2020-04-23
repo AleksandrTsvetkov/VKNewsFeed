@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F3869402451B958005EDE3F /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F38693F2451B958005EDE3F /* TitleView.swift */; };
+		1F3869422451BA31005EDE3F /* InsetableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3869412451BA31005EDE3F /* InsetableTextField.swift */; };
+		1F3869442451CC95005EDE3F /* UserResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3869432451CC95005EDE3F /* UserResponse.swift */; };
 		1F3DA1AF244B0FCC00143E2E /* NewsFeedViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F3DA1AE244B0FCC00143E2E /* NewsFeedViewController.storyboard */; };
 		1F3DA1B2244B1CAC00143E2E /* NewsFeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F3DA1B1244B1CAC00143E2E /* NewsFeedCell.swift */; };
 		1F3DA1B4244B1CFB00143E2E /* NewsFeedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F3DA1B3244B1CFB00143E2E /* NewsFeedCell.xib */; };
@@ -53,6 +56,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1F38693F2451B958005EDE3F /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		1F3869412451BA31005EDE3F /* InsetableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetableTextField.swift; sourceTree = "<group>"; };
+		1F3869432451CC95005EDE3F /* UserResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponse.swift; sourceTree = "<group>"; };
 		1F3DA1AE244B0FCC00143E2E /* NewsFeedViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewsFeedViewController.storyboard; sourceTree = "<group>"; };
 		1F3DA1B1244B1CAC00143E2E /* NewsFeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedCell.swift; sourceTree = "<group>"; };
 		1F3DA1B3244B1CFB00143E2E /* NewsFeedCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsFeedCell.xib; sourceTree = "<group>"; };
@@ -100,6 +106,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F38693E2451B935005EDE3F /* TitleView */ = {
+			isa = PBXGroup;
+			children = (
+				1F38693F2451B958005EDE3F /* TitleView.swift */,
+				1F3869412451BA31005EDE3F /* InsetableTextField.swift */,
+			);
+			path = TitleView;
+			sourceTree = "<group>";
+		};
 		1F3DA1B0244B1C9400143E2E /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				1F666B45244A0FA600FC26FD /* FeedResponse.swift */,
+				1F3869432451CC95005EDE3F /* UserResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,6 +148,7 @@
 		1F666B49244A80A800FC26FD /* NewsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				1F38693E2451B935005EDE3F /* TitleView */,
 				1F425C1E2450F3FE003E8AE1 /* GalleryView */,
 				1F3DA1B0244B1C9400143E2E /* Cell */,
 				1F666B4F244A80E300FC26FD /* NewsFeedInteractor.swift */,
@@ -346,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F3869422451BA31005EDE3F /* InsetableTextField.swift in Sources */,
 				1FB92A642449C7BD008716C1 /* AppDelegate.swift in Sources */,
 				1F425C222450F5A5003E8AE1 /* GalleryCollectionViewCell.swift in Sources */,
 				1F439B88244F0CEB00B529BC /* Constraints.swift in Sources */,
@@ -356,7 +374,9 @@
 				1FB92A692449C7BD008716C1 /* UIViewController + Storyboard.swift in Sources */,
 				1FB92A602449C7BD008716C1 /* AuthViewController.swift in Sources */,
 				1F666B48244A118E00FC26FD /* NetworkDataFetcher.swift in Sources */,
+				1F3869442451CC95005EDE3F /* UserResponse.swift in Sources */,
 				1FB92A6A2449C7BD008716C1 /* NetworkService.swift in Sources */,
+				1F3869402451B958005EDE3F /* TitleView.swift in Sources */,
 				1FB92A662449C7BD008716C1 /* SceneDelegate.swift in Sources */,
 				1F439B86244F080100B529BC /* NewsFeedCodeCell.swift in Sources */,
 				1F439B8A244F1EA700B529BC /* UIColor + HexValue.swift in Sources */,

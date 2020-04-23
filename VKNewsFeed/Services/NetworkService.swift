@@ -28,7 +28,6 @@ final class NetworkService: Networking {
             print("Token is nil in \(#function)")
             return
         }
-        let parameters = ["filters": "post,photo"]
         var allParameters = parameters
         allParameters["access_token"] = token
         allParameters["v"] = API.version
@@ -53,7 +52,7 @@ final class NetworkService: Networking {
         var components = URLComponents()
         components.scheme = API.scheme
         components.host = API.host
-        components.path = API.newsFeed
+        components.path = path
         components.queryItems = parameters.map { URLQueryItem(name: $0, value: $1) }
         
         return components.url!

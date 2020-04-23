@@ -10,14 +10,33 @@ import UIKit
 
 protocol DataFetcher {
     func getFeed(response: @escaping (FeedResponse?) -> Void)
+    func getUser(response: @escaping (UserResponse?) -> Void)
 }
 
 struct NetworkDataFetcher: DataFetcher {
     
+    private let authService: AuthService
     let networking: Networking
     
-    init(networking: Networking) {
+    init(networking: Networking, authService: AuthService = AppDelegate.shared().authService) {
         self.networking = networking
+        self.authService = authService
+    }
+    
+    func getUser(response: @escaping (UserResponse?) -> Void) {
+        guard let userId = authService.userId else {
+            print("Failed to get userId in \(#function)")
+            return
+        }
+        let parameters = ["user_ids": userId, "fields" : "photo_100"]
+        networking.request(path: API.user, parameters: parameters) { (data, error) in
+            if let error = error {
+                print("Received error in \(#function): \(error.localizedDescription)")
+                response(nil)
+            }
+            let decoded = self.decodeJSON(type: UserResponseWrapped.self, from: data)
+            response(decoded?.response.first)
+        }
     }
     
     func getFeed(response: @escaping (FeedResponse?) -> Void) {
