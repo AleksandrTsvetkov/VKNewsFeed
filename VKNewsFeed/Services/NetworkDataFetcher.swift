@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DataFetcher {
-    func getFeed(response: @escaping (FeedResponse?) -> Void)
+    func getFeed(nextBatchFrom: String?, response: @escaping (FeedResponse?) -> Void)
     func getUser(response: @escaping (UserResponse?) -> Void)
 }
 
@@ -39,8 +39,9 @@ struct NetworkDataFetcher: DataFetcher {
         }
     }
     
-    func getFeed(response: @escaping (FeedResponse?) -> Void) {
-        let parameters = ["filters": "post, photo"]
+    func getFeed(nextBatchFrom: String?, response: @escaping (FeedResponse?) -> Void) {
+        var parameters = ["filters": "post, photo"]
+        parameters["start_from"] = nextBatchFrom
         networking.request(path: API.newsFeed, parameters: parameters) { (data, error) in
             if let error = error {
                 print("Received error in \(#function): \(error.localizedDescription)")

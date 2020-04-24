@@ -87,6 +87,12 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic, NewsFeedCo
         let cellViewModel = feedViewModel.cells[indexPath.row]
         interactor?.makeRequest(request: .revealPostIds(postId: cellViewModel.postId))
     }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height / 1.1 {
+            interactor?.makeRequest(request: .getNextBatch)
+        }
+    }
 }
 
 extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
@@ -102,11 +108,6 @@ extension NewsFeedViewController: UITableViewDelegate, UITableViewDataSource {
         cell.set(viewModel: cellViewModel)
         cell.delegate = self
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("row is selected")
-        interactor?.makeRequest(request: .getNewsFeed)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
