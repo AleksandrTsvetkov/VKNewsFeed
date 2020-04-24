@@ -16,10 +16,11 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic, NewsFeedCo
     
     var interactor: NewsFeedBusinessLogic?
     var router: (NSObjectProtocol & NewsFeedRoutingLogic)?
-    private var feedViewModel: FeedViewModel = FeedViewModel.init(cells: [])
+    private var feedViewModel: FeedViewModel = FeedViewModel.init(cells: [], footerTitle: nil)
     
     @IBOutlet weak var tableView: UITableView!
     private var titleView: TitleView = TitleView()
+    private lazy var footerView: FooterView = FooterView()
     private var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
@@ -59,6 +60,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic, NewsFeedCo
         tableView.separatorStyle = .none
         tableView.backgroundColor = .clear
         tableView.addSubview(refreshControl)
+        tableView.tableFooterView = footerView
     }
     
     private func setupTopBars() {
@@ -75,10 +77,13 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic, NewsFeedCo
         switch viewModel {
         case .displayNewsFeed(feedViewModel: let feedViewModel):
             self.feedViewModel = feedViewModel
+            footerView.setTitle(title: feedViewModel.footerTitle)
             tableView.reloadData()
             refreshControl.endRefreshing()
         case .displayUser(userViewModel: let userViewModel):
             titleView.set(userViewModel: userViewModel)
+        case .displayFooterLoader:
+            footerView.showLoader()
         }
     }
     
@@ -89,7 +94,7 @@ class NewsFeedViewController: UIViewController, NewsFeedDisplayLogic, NewsFeedCo
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if scrollView.contentOffset.y > scrollView.contentSize.height / 1.1 {
+        if scrollView.contentOffset.y > scrollView.contentSize.height / 1.03 {
             interactor?.makeRequest(request: .getNextBatch)
         }
     }
